@@ -1,7 +1,6 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do/core/models/task_model.dart';
 import 'package:to_do/modules/layout/manager/provider.dart';
@@ -28,20 +27,18 @@ class TaskScreen extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                        child: Text("Hi , ${provider.user?.name.toUpperCase()??""}",
-                            style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold)),
+                        child: Text(
+                            "Hi , ${provider.user?.name.toUpperCase() ?? ""}",
+                            style: Theme.of(context).textTheme.bodyLarge),
                       ),
                     ],
                   ),
-
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 150.0),
                   child: EasyInfiniteDateTimeLine(
-                    firstDate:FirebaseAuth.instance.currentUser!.metadata.creationTime!,
+                    firstDate: FirebaseAuth
+                        .instance.currentUser!.metadata.creationTime!,
                     lastDate: DateTime.now().add(const Duration(days: 365)),
                     showTimelineHeader: false,
                     focusDate: provider.selectedDate,
@@ -51,8 +48,22 @@ class TaskScreen extends StatelessWidget {
                         todayHighlightStyle: TodayHighlightStyle.withBackground,
                         todayHighlightColor: const Color(0xff85a5ff),
                         inactiveDayStyle: DayStyle(
+                            dayStrStyle: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(fontWeight: FontWeight.w400),
+                            monthStrStyle: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(fontWeight: FontWeight.w400),
+                            dayNumStyle: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(fontWeight: FontWeight.w400),
                             decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: MainProvider.mode == ThemeMode.light
+                                    ? Theme.of(context).secondaryHeaderColor
+                                    : Theme.of(context).secondaryHeaderColor,
                                 borderRadius: BorderRadius.circular(15)))),
                   ),
                 ),
@@ -73,7 +84,9 @@ class TaskScreen extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: tasks.length,
                       itemBuilder: (context, index) {
-                        return CustomCardTask(taskModel: tasks[index],);
+                        return CustomCardTask(
+                          taskModel: tasks[index],
+                        );
                       },
                     ),
                   );

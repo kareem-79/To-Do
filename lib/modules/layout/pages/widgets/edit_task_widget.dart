@@ -20,29 +20,27 @@ class EditTaskWidget extends StatelessWidget {
             children: [
               Text(
                 "Edit Task",
-                style: GoogleFonts.inter(
-                    fontSize: 18, fontWeight: FontWeight.w700),
-              ),
+                style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: 25),
               TextField(
                 controller: provider.titleController,
                 decoration: InputDecoration(
                     hintText: "Edit Title",
-                    hintStyle: GoogleFonts.inter(
-                        fontSize: 20, fontWeight: FontWeight.w400)),
+                    hintStyle: Theme.of(context).textTheme.bodyMedium),
               ),
               const SizedBox(height: 20),
               TextField(
                 controller: provider.descController,
                 decoration: InputDecoration(
                     hintText: "Edit Desc",
-                    hintStyle: GoogleFonts.inter(
-                        fontSize: 20, fontWeight: FontWeight.w400)),
+                    hintStyle: Theme.of(context).textTheme.bodyMedium),
               ),
               const SizedBox(height: 20),
               Text("Selected Date",
-                  style: GoogleFonts.inter(
-                      fontSize: 18, fontWeight: FontWeight.w400)),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(fontWeight: FontWeight.w400)),
               InkWell(
                   onTap: () {
                     showDatePicker(
@@ -61,8 +59,10 @@ class EditTaskWidget extends StatelessWidget {
                 height: 10,
               ),
               Text("Selected Time",
-                  style: GoogleFonts.inter(
-                      fontSize: 18, fontWeight: FontWeight.w400)),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(fontWeight: FontWeight.w400)),
               InkWell(
                   onTap: () {
                     showTimePicker(context: context, initialTime: provider.time)
@@ -72,8 +72,10 @@ class EditTaskWidget extends StatelessWidget {
                   },
                   child: Text(
                     "${provider.time.hour}:${provider.time.minute}",
-                    style: GoogleFonts.inter(
-                        fontSize: 18, fontWeight: FontWeight.w400),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.w400)
                   )),
               const Spacer(),
               ElevatedButton(

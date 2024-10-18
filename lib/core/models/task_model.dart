@@ -26,7 +26,7 @@ class TaskModel {
         time: json["time"],
         date: json["date"],
         isDone: json["isDone"],
-        userId: json["userId"]);
+        userId: json["user"]);
   }
 
   Map<String, dynamic> toJson() {

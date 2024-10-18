@@ -62,7 +62,7 @@ class FirebaseFunctions {
     var ref = mainTaskFunction();
     return ref
         .where("date",
-            isEqualTo: DateUtils.dateOnly(time).millisecondsSinceEpoch).where("userId",isEqualTo:userId )
+            isEqualTo: DateUtils.dateOnly(time).millisecondsSinceEpoch).where("user",isEqualTo:userId )
         .snapshots();
   }
 

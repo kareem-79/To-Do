@@ -8,7 +8,6 @@ class LayoutScreen extends StatelessWidget {
   static const String routeName = "LayoutScreen";
 
   const LayoutScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -25,14 +24,12 @@ class LayoutScreen extends StatelessWidget {
               floatingActionButtonLocation:
                   FloatingActionButtonLocation.centerDocked,
               floatingActionButton: FloatingActionButton(
-                shape: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(360),
-                    borderSide: const BorderSide(color: Colors.white, width: 3)),
                 onPressed: () {
                   showModalBottomSheet(
+                    backgroundColor: Theme.of(context).secondaryHeaderColor,
                     isDismissible: true,
                     showDragHandle: true,
-                    shape: const RoundedRectangleBorder(
+                    shape:const RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(15),
                       topRight: Radius.circular(15),
@@ -53,9 +50,7 @@ class LayoutScreen extends StatelessWidget {
                   topRight: Radius.circular(15),
                 ),
                 child: BottomAppBar(
-                  shape: const CircularNotchedRectangle(),
                   notchMargin: 8,
-                  color: Colors.white,
                   child: BottomNavigationBar(
                     showSelectedLabels: false,
                     showUnselectedLabels: false,

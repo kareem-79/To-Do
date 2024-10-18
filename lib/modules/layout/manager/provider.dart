@@ -14,6 +14,7 @@ class MainProvider extends ChangeNotifier {
   DateTime selectedDatePiker = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
   List<Widget> screens = [const TaskScreen(), const SettingScreen()];
+  static ThemeMode mode = ThemeMode.light;
 
   TextEditingController titleController = TextEditingController();
   TextEditingController descController = TextEditingController();
@@ -48,18 +49,15 @@ class MainProvider extends ChangeNotifier {
   }
 
   void editTasks(TaskModel taskModel) async {
-    TaskModel updatedTaskModel = TaskModel(
-        id: taskModel.id,
-        title: titleController.text.isNotEmpty
-            ? titleController.text
-            : taskModel.title,
-        desc: descController.text.isNotEmpty
-            ? descController.text
-            : taskModel.desc,
-        time: "${time.hour}:${time.minute}",
-        date: DateUtils.dateOnly(selectedDatePiker).millisecondsSinceEpoch,
-        isDone: taskModel.isDone);
-    await FirebaseFunctions.editTask(updatedTaskModel);
+    taskModel.title = titleController.text.isNotEmpty
+        ? titleController.text
+        : taskModel.title;
+    taskModel.desc = descController.text.isNotEmpty
+        ? descController.text
+        : taskModel.desc;
+    taskModel.time =  "${time.hour}:${time.minute}";
+    taskModel.date = DateUtils.dateOnly(selectedDatePiker).millisecondsSinceEpoch;
+    await FirebaseFunctions.editTask(taskModel);
     titleController.clear();
     descController.clear();
   }
@@ -91,5 +89,11 @@ class MainProvider extends ChangeNotifier {
     FirebaseAuth.instance.signOut();
     Navigator.pushNamedAndRemoveUntil(
         context, LoginScreen.routeName, (route) => false);
+  }
+
+
+  changeTheme(ThemeMode themeMode) {
+    mode = themeMode;
+    notifyListeners();
   }
 }

@@ -12,6 +12,7 @@ void main()async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(const MyApp());
 }
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "To Do ",
-      theme: AppTheme.lightTheme,
+      theme: AppTheme.darkTheme,
       routes: {
         SplashScreen.routeName: (_) => const SplashScreen(),
         LayoutScreen.routeName: (_) => const LayoutScreen(),

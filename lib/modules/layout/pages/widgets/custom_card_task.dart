@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do/core/models/task_model.dart';
 import 'package:to_do/modules/layout/manager/provider.dart';
@@ -14,6 +13,7 @@ class CustomCardTask extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var pro = Provider.of<MainProvider>(context);
     return Consumer<MainProvider>(
       builder: (context, provider, child) {
         return Padding(
@@ -40,6 +40,7 @@ class CustomCardTask extends StatelessWidget {
                     onPressed: (_) {
                       provider.editTasks(taskModel);
                       showModalBottomSheet(
+                        backgroundColor: Theme.of(context).secondaryHeaderColor,
                         isDismissible: true,
                         showDragHandle: true,
                         shape: const RoundedRectangleBorder(
@@ -64,7 +65,7 @@ class CustomCardTask extends StatelessWidget {
               height: 130,
               width: double.infinity,
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+                  color: Theme.of(context).secondaryHeaderColor, borderRadius: BorderRadius.circular(20)),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -89,23 +90,21 @@ class CustomCardTask extends StatelessWidget {
                         ),
                         Text(taskModel.title,
                             style: taskModel.isDone == true
-                                ? GoogleFonts.poppins(
-                                    fontSize: 22,
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.w600)
-                                : GoogleFonts.poppins(
-                                    fontSize: 22,
-                                    color: Colors.blue,
-                                    fontWeight: FontWeight.w600)),
+                                ? Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Colors.green
+                            )
+                                : Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Colors.blue
+                            )),
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(taskModel.desc),
+                        Text(taskModel.desc,style:Theme.of(context).textTheme.labelSmall),
                         const Spacer(),
                         Row(
                           children: [
                             const Icon(Icons.timelapse),
-                            Text(taskModel.time)
+                            Text(taskModel.time,style:Theme.of(context).textTheme.labelSmall)
                           ],
                         )
                       ],
@@ -122,19 +121,17 @@ class CustomCardTask extends StatelessWidget {
                           height: 40,
                           decoration: taskModel.isDone == true
                               ? BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white)
+                                  borderRadius:BorderRadius.circular(10),
+                                  color: Theme.of(context).secondaryHeaderColor)
                               : BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.blue),
                           child: taskModel.isDone == true
                               ? Text(
                                   "isDone...!",
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.green,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700),
-                                )
+                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: Colors.green
+                                  ))
                               : const Icon(
                                   Icons.check,
                                   color: Colors.white,
